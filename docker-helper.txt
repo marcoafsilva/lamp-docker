@@ -1,0 +1,7 @@
+-- Rebuild composer img
+sudo docker-compose up -d --force-recreate --build
+
+-- Access container bash
+sudo docker container exec -it [container_name] bash
+	EX: 
+		sudo docker container exec -it php_web bash

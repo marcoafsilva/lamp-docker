@@ -1,0 +1,12 @@
+FROM php:7.2.2-apache
+
+# Version
+ENV COMPOSER_VERSION 1.8.5
+
+# Installing Composer
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+
+# Installing Sass
+COPY dart-sass.tar.gz /opt/
+RUN tar -xvf /opt/dart-sass.tar.gz
+RUN echo "export PATH=\"/opt/:$PATH\"" >> ~/.bashrc
