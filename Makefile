@@ -77,7 +77,7 @@ logs:
 ## Interact within the container
 .PHONY: interact
 interact:
-	@docker container exec -it php_web sh
+	@docker container exec -it php_web bash
 
 ## Inspect the container
 .PHONY: inspect
