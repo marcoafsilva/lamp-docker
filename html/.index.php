@@ -2,16 +2,20 @@
 <html>
 <head>
    <meta charset="UTF-8">
-   <link rel="shortcut icon" href="./.images/favicon.png">
+   <link rel="shortcut icon" href="./.assets/favicon.png">
    <title>Directory Contents</title>
 
-   <link rel="stylesheet" href="./.style.css">
-   <script src="./.sorttable.js"></script>
+   <link rel="stylesheet" href="./.assets/.style.css">
+   <script src="./.assets/.sorttable.js"></script>
 </head>
 
 <body>
 <div id="container">
 	<h1>Directory Contents</h1>
+
+	<div class="shortcuts">
+		<a href="./.assets/.phpinfo.php"><span class="icon php"></span>Phpinfo</a>
+	</div>
 
 	<table class="sortable">
 	    <thead>
