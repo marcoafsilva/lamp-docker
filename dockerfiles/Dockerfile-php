@@ -17,4 +17,5 @@ RUN echo "export PATH=\"/opt/:$PATH\"" >> ~/.bashrc
 # Installing Git
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y git
+    apt-get install -y git && \
+    apt-get install -y zip
