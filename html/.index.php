@@ -3,7 +3,7 @@
 <head>
    <meta charset="UTF-8">
    <link rel="shortcut icon" href="./.assets/favicon.png">
-   <title>Directory Contents</title>
+   <title>Localhost - Directory Contents</title>
 
    <link rel="stylesheet" href="./.assets/.style.css">
    <script src="./.assets/.sorttable.js"></script>
