@@ -13,8 +13,19 @@
 <div id="container">
 	<h1>Directory Contents</h1>
 
+	<?php
+		$phpFiles = array_filter(array_diff(scandir('./.assets/'), ['.', '..']), function($file){
+			return preg_match("/(.php)/i", $file) && !in_array($file, ['.error.php', '.index.php']);
+		});
+	?>
+
 	<div class="shortcuts">
-		<a href="./.assets/.phpinfo.php"><span class="icon php"></span>Phpinfo</a>
+		<?php foreach($phpFiles AS $key => $value): ?>
+			<a href="./.assets/<?= $value ?>">
+				<span class="icon php"></span>
+				<?= preg_replace("/^(\.)(.*)(.php)$/", "$2", $value) ?>
+			</a>
+		<?php endforeach; ?>
 	</div>
 
 	<table class="sortable">
