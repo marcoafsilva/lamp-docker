@@ -1,6 +1,6 @@
 
 html/*
-!html/.assets
+!html/.assets/*
 !html/.htaccess
 !html/.index.php
 

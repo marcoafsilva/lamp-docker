@@ -83,3 +83,11 @@ interact:
 .PHONY: inspect
 inspect:
 	@docker container inspect php_web
+
+## Clean/Pull/Create
+.PHONY: full-recreate
+full-recreate:
+	@docker-compose rm --all
+	@docker-compose pull
+	@docker-compose build --no-cache
+	@docker-compose up -d --force-recreate
