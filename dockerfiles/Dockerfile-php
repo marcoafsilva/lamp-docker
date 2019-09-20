@@ -1,5 +1,7 @@
 FROM php:7.2.2-apache
 
+COPY 000-default.conf /etc/apache2/sites-available/
+
 RUN docker-php-ext-install pdo pdo_mysql
 RUN a2enmod rewrite
 
@@ -18,4 +20,5 @@ RUN echo "export PATH=\"/opt/:$PATH\"" >> ~/.bashrc
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y git && \
-    apt-get install -y zip
+    apt-get install -y zip && \
+    apt-get install -y vim
