@@ -1,9 +1,6 @@
 
 html/*
-!html/.images
-!html/.error.php
+!html/.assets
 !html/.htaccess
 !html/.index.php
-!html/.sorttable.js
-!html/.style.css
-!html/phpinfo.php
+
