@@ -21,8 +21,9 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 # Installing Sass
 COPY dart-sass.tar.gz /opt/
-RUN tar -xvf /opt/dart-sass.tar.gz
-RUN echo "export PATH=\"/opt/:$PATH\"" >> ~/.bashrc
+WORKDIR /opt/
+RUN tar -xvf dart-sass.tar.gz
+RUN echo "export PATH='/opt/dart-sass/:$PATH'" >> ~/.bashrc
 
 # Installing Git
 RUN apt-get update && \
@@ -30,3 +31,5 @@ RUN apt-get update && \
     apt-get install -y git && \
     apt-get install -y zip && \
     apt-get install -y vim
+
+WORKDIR /var/www/html/
