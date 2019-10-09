@@ -5,7 +5,8 @@ COPY conf/pessoal.conf   /etc/apache2/sites-available/
 COPY conf/aa.conf        /etc/apache2/sites-available/
 
 # Installing PHP-Pdo-mysql Driver
-RUN docker-php-ext-install pdo pdo_mysql
+RUN docker-php-ext-install pdo pdo_mysql mysqli
+RUN docker-php-ext-enable mysqli
 
 # Enabling URL rewrite module and setting .conf apache file
 RUN a2enmod rewrite
@@ -23,6 +24,7 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 COPY dart-sass.tar.gz /opt/
 WORKDIR /opt/
 RUN tar -xvf dart-sass.tar.gz
+# ENV PATH=/opt/dart-sass/:$PATH
 RUN echo "export PATH='/opt/dart-sass/:$PATH'" >> ~/.bashrc
 
 # Installing Git
@@ -32,4 +34,7 @@ RUN apt-get update && \
     apt-get install -y zip && \
     apt-get install -y vim
 
-WORKDIR /var/www/html/
+WORKDIR /var/www/html
+
+# Exposing 9906 (mysql) port
+EXPOSE 9906
