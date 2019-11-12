@@ -8,6 +8,13 @@ COPY conf/aa.conf        /etc/apache2/sites-available/
 RUN docker-php-ext-install pdo pdo_mysql mysqli
 RUN docker-php-ext-enable mysqli
 
+# Installing PHP modules
+RUN apt-get update -y && apt-get install -y sendmail libpng-dev
+RUN docker-php-ext-install mbstring
+RUN docker-php-ext-install zip
+RUN docker-php-ext-install gd
+RUN docker-php-ext-install opcache
+
 # Enabling URL rewrite module and setting .conf apache file
 RUN a2enmod rewrite
 RUN a2dissite 000-default.conf
@@ -28,8 +35,7 @@ RUN tar -xvf dart-sass.tar.gz
 RUN echo "export PATH='/opt/dart-sass/:$PATH'" >> ~/.bashrc
 
 # Installing Git
-RUN apt-get update && \
-    apt-get upgrade -y && \
+RUN apt-get upgrade -y && \
     apt-get install -y git && \
     apt-get install -y zip && \
     apt-get install -y vim
