@@ -42,5 +42,5 @@ RUN apt-get upgrade -y && \
 
 WORKDIR /var/www/html
 
-# Exposing 9906 (mysql) port
-EXPOSE 9906
+# Exposing 3306 (mysql) port
+EXPOSE 3306
