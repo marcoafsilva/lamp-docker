@@ -25,22 +25,21 @@ RUN a2enmod rewrite && \
     a2ensite aa.conf
 
 # Version
-ENV COMPOSER_VERSION 1.8.5
+# ENV COMPOSER_VERSION 1.8.5
 
 # Installing Composer
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 # Installing Sass
-COPY dart-sass.tar.gz /opt/
-WORKDIR /opt/
-RUN tar -xvf dart-sass.tar.gz && \
-    echo "export PATH='/opt/dart-sass/:$PATH'" >> ~/.bashrc
+COPY dart-sass.tar.gz /tmp/
+RUN tar -xvf /tmp/dart-sass.tar.gz -C /opt/ && \
+    echo "export PATH='/opt/dart-sass/:$PATH'" >> ~/.bashrc &&\
+    rm /tmp/dart-sass.tar.gz
 
 # Installing Git, Zip, Vi, Sendmail and libpng
 RUN apt-get install -y git && \
     apt-get install -y zip && \
     apt-get install -y vim && \
-    apt-get install -y sendmail && \
     apt-get install -y libpng-dev
 
 # Installing Drupal Console
@@ -48,7 +47,7 @@ RUN curl https://drupalconsole.com/installer -L -o drupal.phar && \
     mv drupal.phar /usr/local/bin/drupal && \
     chmod +x /usr/local/bin/drupal
 
-
+# Setting working dir at interact mode
 WORKDIR /var/www/html
 
 # Exposing 3306 (mysql) port
