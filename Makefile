@@ -51,6 +51,7 @@ help:
 start:  stop
 	@docker container rm php_web || true
 	@docker-compose up -d
+	make interact
 
 ## Stop and removes containers, networks, volumes, and images created by up
 .PHONY: stop
@@ -91,3 +92,4 @@ full-recreate:
 	@docker-compose pull
 	@docker-compose build --no-cache
 	@docker-compose up -d --force-recreate
+	make interact

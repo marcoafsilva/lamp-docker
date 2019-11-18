@@ -4,22 +4,25 @@ FROM php:7.2.2-apache
 COPY conf/pessoal.conf   /etc/apache2/sites-available/
 COPY conf/aa.conf        /etc/apache2/sites-available/
 
-# Installing PHP-Pdo-mysql Driver
-RUN docker-php-ext-install pdo pdo_mysql mysqli
-RUN docker-php-ext-enable mysqli
+# Updating docker image repository
+RUN apt-get update 
+
+# Installing PHP-PDO-MySQL Driver
+RUN docker-php-ext-install pdo pdo_mysql mysqli && \
+    docker-php-ext-enable mysqli
 
 # Installing PHP modules
-RUN apt-get update -y && apt-get install -y sendmail libpng-dev
-RUN docker-php-ext-install mbstring
-RUN docker-php-ext-install zip
-RUN docker-php-ext-install gd
-RUN docker-php-ext-install opcache
+RUN apt-get install -y libpng-dev && \
+    docker-php-ext-install mbstring && \
+    docker-php-ext-install zip && \ 
+    docker-php-ext-install gd && \
+    docker-php-ext-install opcache
 
 # Enabling URL rewrite module and setting .conf apache file
-RUN a2enmod rewrite
-RUN a2dissite 000-default.conf
-RUN a2ensite pessoal.conf
-RUN a2ensite aa.conf
+RUN a2enmod rewrite && \
+    a2dissite 000-default.conf && \
+    a2ensite pessoal.conf && \
+    a2ensite aa.conf
 
 # Version
 ENV COMPOSER_VERSION 1.8.5
@@ -30,15 +33,21 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 # Installing Sass
 COPY dart-sass.tar.gz /opt/
 WORKDIR /opt/
-RUN tar -xvf dart-sass.tar.gz
-# ENV PATH=/opt/dart-sass/:$PATH
-RUN echo "export PATH='/opt/dart-sass/:$PATH'" >> ~/.bashrc
+RUN tar -xvf dart-sass.tar.gz && \
+    echo "export PATH='/opt/dart-sass/:$PATH'" >> ~/.bashrc
 
-# Installing Git
-RUN apt-get upgrade -y && \
-    apt-get install -y git && \
+# Installing Git, Zip, Vi, Sendmail and libpng
+RUN apt-get install -y git && \
     apt-get install -y zip && \
-    apt-get install -y vim
+    apt-get install -y vim && \
+    apt-get install -y sendmail && \
+    apt-get install -y libpng-dev
+
+# Installing Drupal Console
+RUN curl https://drupalconsole.com/installer -L -o drupal.phar && \
+    mv drupal.phar /usr/local/bin/drupal && \
+    chmod +x /usr/local/bin/drupal
+
 
 WORKDIR /var/www/html
 
