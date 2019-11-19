@@ -42,10 +42,14 @@ RUN apt-get install -y git && \
     apt-get install -y vim && \
     apt-get install -y libpng-dev
 
-# Installing Drupal Console
+# Installing Drupal Console and Drush Launcher 
 RUN curl https://drupalconsole.com/installer -L -o drupal.phar && \
     mv drupal.phar /usr/local/bin/drupal && \
-    chmod +x /usr/local/bin/drupal
+    chmod +x /usr/local/bin/drupal && \
+    curl https://github.com/drush-ops/drush-launcher/releases/download/0.6.0/drush.phar -L -o drush.phar && \
+    mv drush.phar /usr/local/bin/drush && \
+    chmod +x /usr/local/bin/drush
+
 
 # Setting working dir at interact mode
 WORKDIR /var/www/html
