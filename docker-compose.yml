@@ -23,7 +23,7 @@ services:
     volumes:
       - ./html/:/var/www/html/
     ports:
-      - "80:80"
+      - "9999:80"
     stdin_open: true
     tty: true
     build:
@@ -35,14 +35,18 @@ services:
       - web
     restart: always
 
+  gulp:
+    image: chekote/gulp:latest
+    container_name: gulp
+
 
 # Docker Volumes
 volumes:
   mysql_data:
     driver: local
-  
+
 # Docker Networks
 networks:
   web:
     driver: bridge
-    
+

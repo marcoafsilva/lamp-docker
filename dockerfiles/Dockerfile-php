@@ -5,7 +5,7 @@ COPY conf/pessoal.conf   /etc/apache2/sites-available/
 COPY conf/aa.conf        /etc/apache2/sites-available/
 
 # Updating docker image repository
-RUN apt-get update 
+RUN apt-get update
 
 # Installing PHP-PDO-MySQL Driver
 RUN docker-php-ext-install pdo pdo_mysql mysqli && \
@@ -14,7 +14,7 @@ RUN docker-php-ext-install pdo pdo_mysql mysqli && \
 # Installing PHP modules
 RUN apt-get install -y libpng-dev && \
     docker-php-ext-install mbstring && \
-    docker-php-ext-install zip && \ 
+    docker-php-ext-install zip && \
     docker-php-ext-install gd && \
     docker-php-ext-install opcache
 
@@ -42,7 +42,7 @@ RUN apt-get install -y git && \
     apt-get install -y vim && \
     apt-get install -y libpng-dev
 
-# Installing Drupal Console and Drush Launcher 
+# Installing Drupal Console and Drush Launcher
 RUN curl https://drupalconsole.com/installer -L -o drupal.phar && \
     mv drupal.phar /usr/local/bin/drupal && \
     chmod +x /usr/local/bin/drupal && \
